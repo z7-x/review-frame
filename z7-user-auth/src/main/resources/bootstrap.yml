@@ -1,0 +1,48 @@
+server:
+  port: 9091
+
+spring:
+  profiles:
+    active: dev
+  application:
+    ##这里的name必须与config服务中resources下config目录的配置文件前缀保持一致,例如：user-auth-环境.yml
+    ##或者在cloud.config.name属性中添加前缀
+    name: user-auth
+  cloud:
+    config:
+      ##是否设置快速失败
+      fail-fast: false
+      name: ${spring.application.name}
+      profile: default,${spring.profiles.active}
+      ##application.yml改成bootstrap.yml
+      ##Config Client启动时,都默认会去访问 Server的 8888 端口,此时设置为true
+      discovery:
+        enabled: true
+        service-id: config
+
+
+
+---
+##开发环境配置
+spring:
+  profiles: dev
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    ##访问路径可以显示IP地址
+    prefer-ip-address: true
+
+---
+##测试环境配置
+spring:
+  profiles: test
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://node1:7001/eureka/,http://node2:7002/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true

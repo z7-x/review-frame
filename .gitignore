@@ -1,0 +1,4 @@
+# Project exclude paths
+/z7-config/target/
+/z7-discovery/target/
+/z7-user-auth/target/

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+<mapper namespace="com.z7.bespoke.mapper.DeptMapper">
+
+    <select id="getDepts" resultType="com.z7.bespoke.mapper.po.Dept">
+        select *
+        from sys_dept
+        where 1 = 1
+    </select>
+
+</mapper>

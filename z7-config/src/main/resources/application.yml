@@ -1,0 +1,48 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: config
+  profiles:
+    active: dev,native
+  ##本地配置中心
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/user-auth/,/config/gateway/
+
+##暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+---
+##本地开发、测试环境配置
+spring:
+  profiles: dev
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    ##访问路径可以显示IP地址
+    prefer-ip-address: true
+  ##客户端注册进eureka服务列表内
+  client:
+    serviceUrl:
+      ##单机注册中心,集群模式用","号隔开
+      defaultZone: http://localhost:7001/eureka/
+#    fetch-registry: true
+#    register-with-eureka: true
+---
+##测试环境配置
+spring:
+  profiles: test
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://node1:7001/eureka/,http://node2:7002/eureka/

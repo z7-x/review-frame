@@ -1,0 +1,32 @@
+########### ORM ##########
+mybatis:
+  mapper-locations:
+    - classpath:com.z7.bespoke.**.mapper/*.xml
+  type-aliases-package: com.z7.bespoke.**.mapper.po
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+########### TOMCAT配置 ##########
+server:
+  tomcat:
+    accept-count: 800
+    max-connections: 1200
+    max-threads: 600
+
+########### 通用Mapper ##########
+mapper:
+  identity: MYSQL
+  mappers: tk.mybatis.mapper.common.BaseMapper
+  not-empty: false
+  enum-as-simple-type: true
+
+############ 分页插件 ##########
+pagehelper:
+  helper-dialect: mysql
+  params: count=countSql
+  reasonable: false
+  support-methods-arguments: true
+
+########### 配置中心测试 ##########
+foo: 用户中心-V1.0.1.dev

@@ -1,0 +1,48 @@
+server:
+  port: 9010
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: gateway
+  cloud:
+    cloud:
+      config:
+        fail-fast: true
+        name: ${spring.application.name}
+        profile: default,${spring.profiles.active}
+        discovery:
+          enabled: true
+          service-id: config
+
+##暴露监控端口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+---
+##本地、测试 开发环境配置
+spring:
+  profiles: dev
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    ##访问路径可以显示IP地址
+    prefer-ip-address: true
+---
+##公测环境配置
+spring:
+  profiles: test
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://node1:7001/eureka/,http://node2:7002/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
