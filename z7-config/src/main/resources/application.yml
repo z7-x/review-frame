@@ -11,7 +11,7 @@ spring:
     config:
       server:
         native:
-          search-locations: classpath:/config/user-auth/,/config/gateway/
+          search-locations: classpath:/config/user-auth/,classpath:/config/gateway/
 
 ##暴露监控端点
 management:

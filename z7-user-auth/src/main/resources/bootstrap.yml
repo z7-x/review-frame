@@ -11,7 +11,7 @@ spring:
   cloud:
     config:
       ##是否设置快速失败
-      fail-fast: false
+      fail-fast: true
       name: ${spring.application.name}
       profile: default,${spring.profiles.active}
       ##application.yml改成bootstrap.yml
@@ -19,8 +19,6 @@ spring:
       discovery:
         enabled: true
         service-id: config
-
-
 
 ---
 ##开发环境配置

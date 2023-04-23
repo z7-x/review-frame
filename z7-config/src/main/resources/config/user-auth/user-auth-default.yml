@@ -29,4 +29,4 @@ pagehelper:
   support-methods-arguments: true
 
 ########### 配置中心测试 ##########
-foo: 用户中心-V1.0.1.dev
+foo: 用户中心-V1.0.1.default

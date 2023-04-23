@@ -1,42 +1,40 @@
 server:
-  port: 9010
+  port: 9090
 
 spring:
   profiles:
     active: dev
   application:
+    ##这里的name必须与config服务中resources下config目录的配置文件前缀保持一致,例如：gateway-环境.yml
+    ##或者在cloud.config.name属性中添加前缀
     name: gateway
   cloud:
-    cloud:
-      config:
-        fail-fast: true
-        name: ${spring.application.name}
-        profile: default,${spring.profiles.active}
-        discovery:
-          enabled: true
-          service-id: config
-
-##暴露监控端口
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
+    config:
+      ##是否设置快速失败
+      fail-fast: true
+      name: ${spring.application.name}
+      profile: default,${spring.profiles.active}
+      ##application.yml改成bootstrap.yml
+      ##Config Client启动时,都默认会去访问 Server的 8888 端口,此时设置为true
+      discovery:
+        enabled: true
+        service-id: config
 
 ---
-##本地、测试 开发环境配置
+##开发环境配置
 spring:
   profiles: dev
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:7001/eureka/
+      defaultZone: http://localhost:7001/eureka
   instance:
     instance-id: ${spring.application.name}:${server.port}
     ##访问路径可以显示IP地址
     prefer-ip-address: true
+
 ---
-##公测环境配置
+##测试环境配置
 spring:
   profiles: test
 eureka:
@@ -46,5 +44,3 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${server.port}
     prefer-ip-address: true
-
-###测试

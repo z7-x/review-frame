@@ -42,6 +42,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+
+
         <!--mysql驱动类-->
         <dependency>
             <groupId>mysql</groupId>

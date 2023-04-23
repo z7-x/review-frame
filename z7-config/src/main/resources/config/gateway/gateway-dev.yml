@@ -1,1 +1,15 @@
-foo: 配置中心版本V.1.0.1.dev
+######### 数据库:待扩展--主从与哨兵模式 ##########
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:33061/z7_gateway?useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    username: root
+    password: qwer1234#
+
+########## 暴露监控端口 ##########
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

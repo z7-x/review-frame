@@ -19,7 +19,6 @@ import tk.mybatis.spring.annotation.MapperScan;
  *
  * @author z7
  */
-
 @EnableEurekaClient
 @RestController
 @ComponentScan(basePackages = {"com.z7.bespoke.*"})//开启包扫描
