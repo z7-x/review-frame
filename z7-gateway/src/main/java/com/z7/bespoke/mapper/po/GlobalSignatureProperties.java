@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * 项目名称：review-frame
  * 类 名 称：GlobalSignatureProperties
- * 类 描 述：TODO 全局签名验证属性
+ * 类 描 述：TODO 第三方接口签名验证配置
  * 创建时间：2023/4/25 11:04 上午
  * 创 建 人：z7
  */
@@ -35,7 +35,7 @@ public class GlobalSignatureProperties implements Serializable {
      */
     private String authorizationHeaderName;
     /**
-     * 需要进行拦截的地址列表用英文逗号隔开例：/home/**,/work/**
+     * 需要进行拦截的地址列表用英文逗号隔开例：/user/**,/work/**
      */
     private String needFilterUrlPatterns;
     /**

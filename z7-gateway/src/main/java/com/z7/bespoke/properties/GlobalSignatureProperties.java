@@ -10,7 +10,7 @@ import java.util.List;
  /**
  * 项目名称：review-frame
  * 类 名 称：GatewayController
- * 类 描 述：TODO 三方接口验签配置
+ * 类 描 述：TODO 第三方接口验签属性配置
  * 创建时间：2023/4/25 3:42 下午
  * 创 建 人：z7
  */

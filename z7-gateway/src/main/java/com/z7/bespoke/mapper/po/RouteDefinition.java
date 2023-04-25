@@ -11,7 +11,7 @@ import javax.persistence.Table;
 /**
  * 项目名称：review-frame
  * 类 名 称：RouteDefinition
- * 类 描 述：TODO 路由定义
+ * 类 描 述：TODO 服务内部调用路由配置
  * 创建时间：2023/4/25 11:04 上午
  * 创 建 人：z7
  */

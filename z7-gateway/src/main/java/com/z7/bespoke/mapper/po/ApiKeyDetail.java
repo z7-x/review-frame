@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * 项目名称：review-frame
  * 类 名 称：ApiKeyDetail
- * 类 描 述：TODO  密钥信息
+ * 类 描 述：TODO 第三方接口验签密钥信息
  * 创建时间：2023/4/25 11:04 上午
  * 创 建 人：z7
  */

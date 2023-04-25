@@ -1,5 +1,6 @@
 package com.z7.bespoke;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  *
  * @author z7
  */
+@Slf4j
 /*开启包扫描*/
 @ComponentScan(basePackages = {"com.z7.bespoke.*"})
 /*开启扫描mybatis包*/
@@ -35,7 +37,7 @@ public class GatewayApplication {
 
     @RequestMapping(value = "/foo")
     public String hi() {
-        System.out.println(foo);
+        log.info("测试配置文件是否读取:{}", foo);
         return foo;
     }
 }

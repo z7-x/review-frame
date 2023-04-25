@@ -8,6 +8,9 @@ spring:
     ##这里的name必须与config服务中resources下config目录的配置文件前缀保持一致,例如：gateway-环境.yml
     ##或者在cloud.config.name属性中添加前缀
     name: gateway
+  ##意思是后来发现的bean会覆盖之前相同名称的bean
+  main:
+    allow-bean-definition-overriding: true
   cloud:
     config:
       ##是否设置快速失败
