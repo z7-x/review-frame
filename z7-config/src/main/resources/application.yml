@@ -6,12 +6,14 @@ spring:
     name: config
   profiles:
     active: dev,native
-  ##本地配置中心
+  ##本地配置
   cloud:
     config:
       server:
         native:
-          search-locations: classpath:/config/user-auth/,classpath:/config/gateway/
+          search-locations:
+          - classpath:/config/user-auth/
+          - classpath:/config/gateway/
 
 ##暴露监控端点
 management:

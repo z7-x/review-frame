@@ -19,6 +19,30 @@ spring:
       discovery:
         enabled: true
         service-id: config
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          ##开启小写验证，默认feign根据服务名查找都是用的全大写
+          lower-case-service-id: true
+      ##路由数组[路由 就是根据指定当前请求满足什么条件的时候就转发到哪个微服务]
+      routes:
+        ##id:当前路由的标识，要求唯一
+        - id: user_auth_routes
+          ##uri:目标微服务的请求地址:http://localhost:9091 或者用注册的服务名 lb://user-auth 均可
+          uri: lb://user-auth
+          ##order:路由的优先级，数字越小优先级越高
+          order: 1
+          ##predicates:断言（就是路由转发需要满足的条件）
+          predicates:
+            ##Path:当请求路径满足Path指定的规则时，才进行路由转发
+            - Path=/user-auth/**
+            ##过滤器：请求在传递的过程中允许通过过滤器对其进行一定的更改
+            ##StripPrefix：StripPrefix参数表示在将请求发送到下游之前从请求中剥离的路径个数,此处配置去除一级前缀的路径
+            ##PrefixPath：作用和StripPrefix正相反，是在URL路径前面添加一部分的前缀
+          filters:
+            - StripPrefix=1
+#            - PrefixPath=1
 
 ---
 ##开发环境配置

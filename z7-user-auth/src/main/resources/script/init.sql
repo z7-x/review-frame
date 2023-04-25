@@ -1,5 +1,5 @@
 -- ----------------------------
--- 1、部门表  
+-- 1、公司/部门表
 -- ----------------------------
 drop table if exists sys_dept;
 create table sys_dept (

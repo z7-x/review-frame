@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.z7.bespoke.mapper.GlobalSignaturePropertiesMapper">
+
+    <resultMap id="GlobalSignaturePropertiesMap" type="com.z7.bespoke.mapper.po.GlobalSignatureProperties">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="enabled" column="enabled" jdbcType="VARCHAR"/>
+        <result property="apiKeyHeaderName" column="api_key_header_name" jdbcType="VARCHAR"/>
+        <result property="authorizationHeaderName" column="authorization_header_name" jdbcType="VARCHAR"/>
+        <result property="needFilterUrlPatterns" column="need_filter_url_patterns" jdbcType="VARCHAR"/>
+        <result property="noNeedFilterUrlPatterns" column="no_need_filter_url_patterns" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryGlobalSignatureProperties" resultMap="GlobalSignaturePropertiesMap">
+        select id, enabled, api_key_header_name, authorization_header_name, need_filter_url_patterns, no_need_filter_url_patterns
+        from global_signature_properties
+    </select>
+
+</mapper>
+
