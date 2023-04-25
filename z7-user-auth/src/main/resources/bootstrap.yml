@@ -19,6 +19,9 @@ spring:
       discovery:
         enabled: true
         service-id: config
+  ##意思是后来发现的bean会覆盖之前相同名称的bean
+  main:
+    allow-bean-definition-overriding: true
 
 ---
 ##开发环境配置
