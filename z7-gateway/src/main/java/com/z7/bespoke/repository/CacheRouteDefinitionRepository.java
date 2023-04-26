@@ -38,7 +38,7 @@ public class CacheRouteDefinitionRepository implements RouteDefinitionRepository
 
     @Override
     public Mono<Void> save(Mono<RouteDefinition> route) {
-        log.info("保存路由信息{}", route);
+        log.info("保存路由信息:{}", route);
         return route.flatMap(routeDefinition -> {
             RouteMapCache.put(GATEWAY_ROUTES + routeDefinition.getId(), JSON.toJSONString(routeDefinition));
             return Mono.empty();

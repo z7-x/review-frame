@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.z7.bespoke.mapper.ApiKeyDetailMapper;
 import com.z7.bespoke.mapper.GlobalSignaturePropertiesMapper;
 import com.z7.bespoke.mapper.RouteDefinitionMapper;
-import com.z7.bespoke.mapper.po.GlobalSignatureProperties;
 import com.z7.bespoke.mapper.po.RouteDefinition;
+import com.z7.bespoke.properties.GlobalSignatureProperties;
 import com.z7.bespoke.repository.CacheRouteDefinitionRepository;
 import com.z7.bespoke.service.IGatewayService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +20,7 @@ import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
@@ -35,14 +36,15 @@ import java.util.*;
  * 创 建 人：z7
  */
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class GatewayServiceImpl implements IGatewayService,ApplicationEventPublisherAware, CommandLineRunner {
     private Logger log = LoggerFactory.getLogger(GatewayServiceImpl.class);
 
     private final CacheRouteDefinitionRepository routeDefinitionWriter;
     private final RouteDefinitionMapper routeDefinitionMapper;
-    private final GlobalSignaturePropertiesMapper filterPropertiesMapper;
-    private final GlobalSignatureProperties signatureFilterProperties;
+    private final GlobalSignaturePropertiesMapper globalSignaturePropertiesMapper;
+    private final GlobalSignatureProperties globalSignatureProperties;
     private final ApiKeyDetailMapper apiKeyDetailMapper;
 
     private ApplicationEventPublisher publisher;

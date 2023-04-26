@@ -45,7 +45,6 @@ spring:
             ##PrefixPath：作用和StripPrefix正相反，是在URL路径前面添加一部分的前缀
           filters:
             - StripPrefix=1
-#            - PrefixPath=1
 
 ---
 ##开发环境配置

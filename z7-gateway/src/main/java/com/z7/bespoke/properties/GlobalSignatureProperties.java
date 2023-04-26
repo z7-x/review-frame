@@ -14,8 +14,8 @@ import java.util.List;
  * 创建时间：2023/4/25 3:42 下午
  * 创 建 人：z7
  */
+ @Data
 @Component
-@Data
 @ConfigurationProperties(prefix = "filter.signature")
 public class GlobalSignatureProperties {
 
