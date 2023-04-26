@@ -137,7 +137,7 @@ public class SignatureGlobalFilter implements GlobalFilter, Ordered {
         String signStr = path + "|" + (paramString.get() == null ? "" : paramString.get()) + "|" + apiKey + "|" + securityKey;
         log.info("signStr:" + signStr);
         String serverSign = MD5Utils.sign(signStr, "UTF-8");
-        log.info("密钥：server sign result:" + serverSign);
+        log.info("server sign result:" + serverSign);
         if (!serverSign.equals(sign)) {
             result.setFailReason(globalSignatureConfigProperties.getAuthorizationHeaderName() + " invalid");
             return result;
