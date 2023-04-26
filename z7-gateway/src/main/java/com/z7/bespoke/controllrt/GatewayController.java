@@ -31,7 +31,6 @@ public class GatewayController {
         return "SUCCESS";
     }
 
-
     @GetMapping("/test")
     public String test() {
         return "SUCCESS";
@@ -39,13 +38,11 @@ public class GatewayController {
 
     @GetMapping("/test-invoke")
     public String testInvoke() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("密钥配置:" + JSON.toJSONString(apiKeyDetail.queryApiKeyDetails()));
-        stringBuilder.append("\n\n\n\n");
-        stringBuilder.append("全局属性配置:" + JSON.toJSONString(apiKeyDetail.queryGlobalSignatureProperties()));
-        stringBuilder.append("\n\n\n\n");
-        stringBuilder.append("路由配置:" + JSON.toJSONString(apiKeyDetail.queryRouteDefinitions()));
-        return stringBuilder.toString();
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("密钥配置:" + JSON.toJSONString(apiKeyDetail.queryApiKeyDetails()));
+        stringBuffer.append("全局属性配置:" + JSON.toJSONString(apiKeyDetail.queryGlobalSignatureProperties()));
+        stringBuffer.append("路由配置:" + JSON.toJSONString(apiKeyDetail.queryRouteDefinitions()));
+        return stringBuffer.toString();
     }
 
 }

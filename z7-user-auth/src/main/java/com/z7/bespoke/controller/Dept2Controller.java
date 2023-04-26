@@ -3,7 +3,6 @@ package com.z7.bespoke.controller;
 import com.z7.bespoke.mapper.po.Dept;
 import com.z7.bespoke.service.IDeptService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +16,10 @@ import java.util.List;
  * 创建时间：2023/4/3 5:07 下午
  * @author z7
  */
-@RequestMapping("/dept")
+@RequestMapping("/dept2")
 @RestController
 @RequiredArgsConstructor
-public class DeptController {
+public class Dept2Controller {
 
     private   final IDeptService deptService;
 

@@ -36,6 +36,7 @@
         <security.version>3.0.4</security.version>
         <mybatis.version>2.0.1</mybatis.version>
         <tk.mybatis.version>2.0.0</tk.mybatis.version>
+        <commons.version>1.11</commons.version>
     </properties>
 
     <!--统一资源管理-->
@@ -94,6 +95,14 @@
                 <groupId>javax.persistence</groupId>
                 <artifactId>persistence-api</artifactId>
                 <version>${persistence.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--commons工具包-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
