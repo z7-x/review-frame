@@ -24,7 +24,7 @@ import java.util.List;
 @Slf4j
 @Component
 public class CacheRouteDefinitionRepository implements RouteDefinitionRepository {
-    public static final String GATEWAY_ROUTES = "nb:gateway:routes";
+    public static final String GATEWAY_ROUTES = "z7:gateway:routes";
 
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
