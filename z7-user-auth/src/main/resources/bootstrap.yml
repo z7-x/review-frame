@@ -22,6 +22,9 @@ spring:
   ##意思是后来发现的bean会覆盖之前相同名称的bean
   main:
     allow-bean-definition-overriding: true
+  banner:
+    charset: UTF-8
+    location: classpath:banner/banner.txt
 
 ---
 ##开发环境配置

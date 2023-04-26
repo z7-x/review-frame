@@ -1,6 +1,7 @@
 package com.z7.bespoke;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -28,7 +29,12 @@ import tk.mybatis.spring.annotation.MapperScan;
 public class UserAuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UserAuthApplication.class, args);
+        SpringApplication application = new SpringApplication(UserAuthApplication.class);
+        /*Banner.Mode.OFF:关闭;*/
+        /*Banner.Mode.CONSOLE:控制台输出，默认方式;*/
+        /*Banner.Mode.LOG:日志输出方式;*/
+        application.setBannerMode(Banner.Mode.LOG);
+        application.run(args);
     }
 
     @Value("${foo}")
