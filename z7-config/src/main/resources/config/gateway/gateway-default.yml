@@ -25,8 +25,8 @@ pagehelper:
 filter:
   signature:
     enabled: true
-    noNeedFilterUrlPatterns: [ /home/door_system/notify ]
-    needFilterUrlPatterns: [ /user/** ]
+    noNeedFilterUrlPatterns: [  ]
+    needFilterUrlPatterns: [ /user-auth/** ]
     key-details: [ { companyCode: Z&DEV, apiKey: 1153f8d42937553bd884b77dabd90097, securityKey: 0ddec2e0b94ad44859f726ec9f35d442 },
                    { companyCode: Z&TEST, apiKey: 62ba0f94f3e4c760f7d48685672a2a08, securityKey: 611f7814b038228ac5c32e15ae471364 },
                    { companyCode: Z&OTHER, apiKey: e31f9f015b7b990827a1fb3dbaeb19b9, securityKey: f1c36a0398cbb867b31515400555506d } ]
