@@ -17,6 +17,7 @@
     </properties>
 
     <dependencies>
+        <!--#############################   基础jar    ####################################-->
         <!--配置中心客户端 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -26,6 +27,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--监控-->
         <dependency>
@@ -36,6 +43,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>HdrHistogram</artifactId>
+                    <groupId>org.hdrhistogram</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- SpringBoot Web容器 -->
         <dependency>
@@ -43,8 +56,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-
-
+        <!--#############################   工具jar    ####################################-->
         <!--mysql驱动类-->
         <dependency>
             <groupId>mysql</groupId>
@@ -56,17 +68,6 @@
             <artifactId>druid</artifactId>
             <version>${mysql.druid.version}</version>
         </dependency>
-        <!--RedisTemplate 依赖-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.lettuce</groupId>-->
-<!--                    <artifactId>lettuce-core</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -89,11 +90,30 @@
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>${tk.mybatis.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mybatis-spring</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <!--fastjson-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
+        </dependency>
+
+        <!--#############################   平台框架jar    ####################################-->
+        <!--平台框架jar-->
+        <dependency>
+            <groupId>com.z7.bespoke</groupId>
+            <artifactId>framework-starter-swagger</artifactId>
+            <version>${version}</version>
         </dependency>
     </dependencies>
 

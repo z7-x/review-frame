@@ -12,15 +12,11 @@
     <artifactId>z7-framework</artifactId>
     <packaging>pom</packaging>
 
+    <!--平台基础配置框架-->
     <modules>
         <module>framework-starter-redis</module>
         <module>framework-starter-poi</module>
         <module>framework-starter-swagger</module>
     </modules>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
 
 </project>

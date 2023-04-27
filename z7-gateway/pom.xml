@@ -26,6 +26,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>HdrHistogram</artifactId>
+                    <groupId>org.hdrhistogram</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -94,8 +100,15 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
-    </dependencies>
 
+        <!--#############################   平台框架jar    ####################################-->
+        <!--平台框架jar-->
+        <dependency>
+            <groupId>com.z7.bespoke</groupId>
+            <artifactId>framework-starter-swagger</artifactId>
+            <version>${version}</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

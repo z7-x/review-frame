@@ -58,7 +58,8 @@ eureka:
     instance-id: ${spring.application.name}:${server.port}
     ##访问路径可以显示IP地址
     prefer-ip-address: true
-
+knife4j:
+  enable: true
 ---
 ##测试环境配置
 spring:

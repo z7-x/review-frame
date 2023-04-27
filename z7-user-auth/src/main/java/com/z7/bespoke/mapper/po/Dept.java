@@ -1,11 +1,11 @@
 package com.z7.bespoke.mapper.po;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -23,13 +23,21 @@ import java.io.Serializable;
 @Table(name = "sys_dept", uniqueConstraints = {@UniqueConstraint(columnNames = {"dept_id"})})
 public class Dept implements Serializable {
 
+    @ApiModelProperty(value = "部门id",required = true)
     private Integer dept_id;
+    @ApiModelProperty(value = "父级部门id",required = true)
     private Integer parent_id;
+    @ApiModelProperty("年龄")
     private String ancestors;
+    @ApiModelProperty(value = "部门名称",required = true)
     private String dept_name;
+    @ApiModelProperty("排序")
     private Integer order_num;
+    @ApiModelProperty("领导")
     private String leader;
+    @ApiModelProperty("电话")
     private String phone;
+    @ApiModelProperty("邮件")
     private String email;
 
 }

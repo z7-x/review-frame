@@ -7,6 +7,7 @@
     <groupId>com.z7.bespoke</groupId>
     <artifactId>review-frame</artifactId>
     <packaging>pom</packaging>
+    <!--注意：更改版本时需要统一-->
     <version>1.0-SNAPSHOT</version>
 
     <!--模块定义-->
@@ -37,6 +38,7 @@
         <mybatis.version>2.0.1</mybatis.version>
         <tk.mybatis.version>2.0.0</tk.mybatis.version>
         <commons.version>1.11</commons.version>
+        <knife4j.version>4.1.0</knife4j.version>
     </properties>
 
     <!--统一资源管理-->
@@ -50,6 +52,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--spring-cloud-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -58,6 +61,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--mysql驱动类-->
             <dependency>
                 <groupId>mysql</groupId>
@@ -66,6 +70,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--数据源-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -74,6 +79,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--fastjson-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -82,6 +88,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--lombok-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -90,6 +97,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--实体表-字段映射 persistence-api-->
             <dependency>
                 <groupId>javax.persistence</groupId>
@@ -98,6 +106,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--commons工具包-->
             <dependency>
                 <groupId>commons-codec</groupId>
@@ -106,31 +115,59 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--knife4j文档：start-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+                <!--springboot低版本兼容问题：https://blog.csdn.net/weixin_39509262/article/details/129584913-->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.plugin</groupId>
+                        <artifactId>spring-plugin-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework.plugin</groupId>
+                        <artifactId>spring-plugin-metadata</artifactId>
+                    </exclusion>
+                </exclusions>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!--集成knife4j版本过低，引入高版本spring-plugin-core-->
+            <dependency>
+                <groupId>org.springframework.plugin</groupId>
+                <artifactId>spring-plugin-core</artifactId>
+                <version>2.0.0.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.plugin</groupId>
+                <artifactId>spring-plugin-metadata</artifactId>
+                <version>2.0.0.RELEASE</version>
+            </dependency>
+            <!--knife4j文档:end-->
         </dependencies>
     </dependencyManagement>
-
-<!--    <build>-->
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <version>3.8.1</version>-->
-<!--                <configuration>-->
-<!--                    <source>${java.version}</source>-->
-<!--                    <target>${java.version}</target>-->
-<!--                    <encoding>${project.build.sourceEncoding}</encoding>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <version>${maven-plugin.version}</version>-->
-<!--                <configuration>-->
-<!--                    <finalName>${project.build.finalName}</finalName>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
+    <!--    <build>-->
+    <!--        <plugins>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                <artifactId>maven-compiler-plugin</artifactId>-->
+    <!--                <version>3.8.1</version>-->
+    <!--                <configuration>-->
+    <!--                    <source>${java.version}</source>-->
+    <!--                    <target>${java.version}</target>-->
+    <!--                    <encoding>${project.build.sourceEncoding}</encoding>-->
+    <!--                </configuration>-->
+    <!--            </plugin>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.springframework.boot</groupId>-->
+    <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+    <!--                <version>${maven-plugin.version}</version>-->
+    <!--                <configuration>-->
+    <!--                    <finalName>${project.build.finalName}</finalName>-->
+    <!--                </configuration>-->
+    <!--            </plugin>-->
+    <!--        </plugins>-->
+    <!--    </build>-->
     <build>
         <finalName>${project.name}</finalName>
         <resources>
@@ -149,7 +186,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${maven-plugin.version}</version>
+                <version>2.2.6.RELEASE</version>
                 <executions>
                     <execution>
                         <goals>

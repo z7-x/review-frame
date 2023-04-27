@@ -2,6 +2,8 @@ package com.z7.bespoke.controller;
 
 import com.z7.bespoke.mapper.po.Dept;
 import com.z7.bespoke.service.IDeptService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +21,13 @@ import java.util.List;
 @RequestMapping("/dept2")
 @RestController
 @RequiredArgsConstructor
+@Api(tags = "我是DemoController---2")
 public class Dept2Controller {
 
     private   final IDeptService deptService;
 
     @GetMapping("/get")
+    @ApiOperation(value = "嘿")
     public List<Dept> get() {
         return deptService.getDeptAll();
     }
