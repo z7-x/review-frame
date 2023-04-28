@@ -17,6 +17,7 @@
         <module>z7-user-auth</module>
         <module>z7-gateway</module>
         <module>z7-framework</module>
+        <module>z7-data-stats</module>
     </modules>
 
     <!--统一版本定义-->

@@ -21,6 +21,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
+            <exclusions>
+                <exclusion>
+                    <!--引入的knife4j中包含了web包-->
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--限流熔断-->
         <dependency>
@@ -41,6 +48,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+            </exclusions>
+
         </dependency>
         <!--配置中心客户端 -->
         <dependency>
@@ -93,6 +107,16 @@
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>${tk.mybatis.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis-spring</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mybatis</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--fastjson-->
         <dependency>
@@ -103,11 +127,11 @@
 
         <!--#############################   平台框架jar    ####################################-->
         <!--平台框架jar-->
-        <dependency>
-            <groupId>com.z7.bespoke</groupId>
-            <artifactId>framework-starter-swagger</artifactId>
-            <version>${version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.z7.bespoke</groupId>-->
+<!--            <artifactId>framework-starter-swagger</artifactId>-->
+<!--            <version>${version}</version>-->
+<!--        </dependency>-->
     </dependencies>
 
 
