@@ -32,6 +32,7 @@ spring:
           enabled: false
           ##开启小写验证，默认feign根据服务名查找都是用的全大写
           lower-case-service-id: true
+
 #      ##路由数组[路由 就是根据指定当前请求满足什么条件的时候就转发到哪个微服务]
 #      routes:
 #        ##id:当前路由的标识，要求唯一
