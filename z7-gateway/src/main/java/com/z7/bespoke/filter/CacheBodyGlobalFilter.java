@@ -50,6 +50,12 @@ public class CacheBodyGlobalFilter implements Ordered, GlobalFilter {
             if (match) {
                 return chain.filter(exchange);
             }
+            /*如果你的网关中有配置鉴权过滤器拦截（权限拦截），则必须放开swagger，否则会导致swagger文档请求错误！！！*/
+            //判断是否为swagger的请求,放行swagger请求
+          /* if (rawPath.contains("/v2/api-docs")) {
+            /*   //放行
+            /*   return chain.filter(exchange);
+            }*/
         }
 
         //查看是否在拦截内

@@ -1,5 +1,7 @@
 package com.z7.bespoke.controller;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.z7.bespoke.mapper.po.Dept;
 import com.z7.bespoke.service.IDeptService;
 import io.swagger.annotations.Api;
@@ -19,6 +21,7 @@ import java.util.List;
  * 创建时间：2023/4/3 5:07 下午
  * @author z7
  */
+@ApiSupport(order = 99)
 @RequestMapping("/dept1")
 @RestController
 @RequiredArgsConstructor
@@ -29,6 +32,7 @@ public class Dept1Controller {
 
     @GetMapping("/get")
     @ApiOperation(value = "哈哈哈")
+    @ApiOperationSupport(order = 3)
     public List<Dept> get() {
         return deptService.getDeptAll();
     }

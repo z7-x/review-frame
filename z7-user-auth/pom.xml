@@ -43,12 +43,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>HdrHistogram</artifactId>
-                    <groupId>org.hdrhistogram</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- SpringBoot Web容器 -->
         <dependency>
@@ -115,6 +109,7 @@
             <artifactId>framework-starter-swagger</artifactId>
             <version>${version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

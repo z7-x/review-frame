@@ -21,25 +21,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
-            <exclusions>
-                <exclusion>
-                    <!--引入的knife4j中包含了web包-->
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!--限流熔断-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>HdrHistogram</artifactId>
-                    <groupId>org.hdrhistogram</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
+        <!--gateway中使用的是webflux-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
@@ -48,13 +36,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-            </exclusions>
-
         </dependency>
         <!--配置中心客户端 -->
         <dependency>
@@ -126,13 +107,20 @@
         </dependency>
 
         <!--#############################   平台框架jar    ####################################-->
-        <!--平台框架jar-->
-<!--        <dependency>-->
-<!--            <groupId>com.z7.bespoke</groupId>-->
-<!--            <artifactId>framework-starter-swagger</artifactId>-->
-<!--            <version>${version}</version>-->
-<!--        </dependency>-->
+        <!--平台框架jar:gateway中排除web服务，解决网关报错No qualifying bean of type ‘org.springframework.core.convert.ConversionService‘-->
+        <!--去除后web对应jar后报错：class path resource [org/springframework/web/servlet/config/annotation/WebMvcConfigurer.class] cannot be opened because it does not exist-->
+        <!--<dependency>-->
+        <!--            <groupId>com.z7.bespoke</groupId>-->
+        <!--            <artifactId>framework-starter-swagger</artifactId>-->
+        <!--            <version>${version}</version>-->
+        <!--            <exclusions>-->
+        <!--                <exclusion>-->
+        <!--                    <groupId>org.springframework.boot</groupId>-->
+        <!--                    <artifactId>spring-boot-starter-web</artifactId>-->
+        <!--                </exclusion>-->
+        <!--            </exclusions>-->
+        <!--        </dependency>-->
+        <!--集成knife4j-->
+
     </dependencies>
-
-
 </project>

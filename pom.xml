@@ -39,7 +39,9 @@
         <mybatis.version>2.0.1</mybatis.version>
         <tk.mybatis.version>2.0.0</tk.mybatis.version>
         <commons.version>1.11</commons.version>
-        <knife4j.version>4.1.0</knife4j.version>
+        <knife4j.version>4.0.0</knife4j.version>
+        <guava.version>15.0</guava.version>
+        <knife4j.clash.version>2.0.0.RELEASE</knife4j.clash.version>
     </properties>
 
     <!--统一资源管理-->
@@ -116,59 +118,30 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--knife4j文档：start-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
-                <!--springboot低版本兼容问题：https://blog.csdn.net/weixin_39509262/article/details/129584913-->
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.plugin</groupId>
-                        <artifactId>spring-plugin-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework.plugin</groupId>
-                        <artifactId>spring-plugin-metadata</artifactId>
-                    </exclusion>
-                </exclusions>
                 <version>${knife4j.version}</version>
             </dependency>
             <!--集成knife4j版本过低，引入高版本spring-plugin-core-->
             <dependency>
                 <groupId>org.springframework.plugin</groupId>
                 <artifactId>spring-plugin-core</artifactId>
-                <version>2.0.0.RELEASE</version>
+                <version>${knife4j.clash.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.plugin</groupId>
                 <artifactId>spring-plugin-metadata</artifactId>
-                <version>2.0.0.RELEASE</version>
+                <version>${knife4j.clash.version}</version>
             </dependency>
             <!--knife4j文档:end-->
+
+
         </dependencies>
     </dependencyManagement>
-    <!--    <build>-->
-    <!--        <plugins>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.apache.maven.plugins</groupId>-->
-    <!--                <artifactId>maven-compiler-plugin</artifactId>-->
-    <!--                <version>3.8.1</version>-->
-    <!--                <configuration>-->
-    <!--                    <source>${java.version}</source>-->
-    <!--                    <target>${java.version}</target>-->
-    <!--                    <encoding>${project.build.sourceEncoding}</encoding>-->
-    <!--                </configuration>-->
-    <!--            </plugin>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.springframework.boot</groupId>-->
-    <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-    <!--                <version>${maven-plugin.version}</version>-->
-    <!--                <configuration>-->
-    <!--                    <finalName>${project.build.finalName}</finalName>-->
-    <!--                </configuration>-->
-    <!--            </plugin>-->
-    <!--        </plugins>-->
-    <!--    </build>-->
+
     <build>
         <finalName>${project.name}</finalName>
         <resources>
@@ -188,6 +161,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.2.6.RELEASE</version>
+                <!--问题背景：今天用spring boot做了一个公共模块，需要打成jar包，让其他项目引用，但打包的时却提示缺少主类，但是我这一个公共模块，本来就没写主类。
+                    错误信息：repackage failed: Unable to find main class
+                    解决链接：https://blog.csdn.net/i402097836/article/details/116232418-->
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

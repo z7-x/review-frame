@@ -22,6 +22,10 @@ spring:
       discovery:
         enabled: true
         service-id: config
+  ##banner设置
+  banner:
+    charset: UTF-8
+    location: classpath:banner/banner.txt
 
 ---
 ##开发环境配置
@@ -36,6 +40,7 @@ eureka:
     ##访问路径可以显示IP地址
     prefer-ip-address: true
 knife4j:
+  ## 开启增强配置
   enable: true
 ---
 ##测试环境配置

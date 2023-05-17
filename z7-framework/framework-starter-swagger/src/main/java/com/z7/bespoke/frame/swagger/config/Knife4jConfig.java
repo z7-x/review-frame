@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 /**
  * 项目名称：review-frame
  * 类 名 称：Knife4jConfig
- * 类 描 述：TODO Knife4j配置
+ * 类 描 述：TODO Knife4j配置----->适用于单体服务文档
  * 创建时间：2023/4/27 10:24 上午
  * 创 建 人：z7
  */
@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
 @EnableSwagger2WebMvc
 public class Knife4jConfig implements WebMvcConfigurer {
 
-    /*对于管控了权限的应用，应放行以下资源*/
+    /*对于管控了权限的应用，应放行以下资源,需要放行的资源已经定义进上面编写的Knife4jConfig中*/
     public static String[] RESOURCE_URLS = new String[]{"/webjars/**", "/swagger**", "/v2/api-docs", "/doc.html"};
 
     @Value("${spring.application.name:default}")
@@ -60,7 +60,7 @@ public class Knife4jConfig implements WebMvcConfigurer {
                         // 服务地址
                         .termsOfServiceUrl("http://local.idea-aedi.com/")
                         // 作者及联系信息
-                        .contact(new Contact("Z-SEVEN", "https://github.com/z7-x/review-frame", "790534238@qq.com"))
+                        .contact(new Contact("z7", "https://github.com/z7-x/review-frame", "790534238@qq.com"))
                         // api版本
                         .version("1.0.0")
                         .build())
