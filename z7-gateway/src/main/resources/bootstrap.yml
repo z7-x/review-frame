@@ -29,7 +29,8 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: false
+          ##是否开启了根据服务发现自动为服务创建router
+          enabled: true
           ##开启小写验证，默认feign根据服务名查找都是用的全大写
           lower-case-service-id: true
 

@@ -1,10 +1,10 @@
 package com.z7.bespoke.frame.swagger.config;
-
 import com.fasterxml.jackson.databind.introspect.BeanPropertyDefinition;
-import com.z7.bespoke.frame.swagger.support.EnumDescriptor;
+import com.github.xiaoymin.knife4j.core.model.MarkdownProperty;
+import com.github.xiaoymin.knife4j.spring.extension.OpenApiExtensionResolver;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +17,18 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import springfox.documentation.builders.*;
-import springfox.documentation.service.*;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.ModelSpecificationBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.PropertySpecificationBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.RequestParameterBuilder;
+import springfox.documentation.schema.ScalarType;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.Contact;
+import springfox.documentation.service.SecurityReference;
+import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.schema.ModelPropertyBuilderPlugin;
 import springfox.documentation.spi.schema.contexts.ModelPropertyContext;
@@ -26,41 +36,48 @@ import springfox.documentation.spi.service.ParameterBuilderPlugin;
 import springfox.documentation.spi.service.contexts.ParameterContext;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * 项目名称：review-frame
- * 类 名 称：Knife4jConfig
- * 类 描 述：TODO Knife4j配置----->适用于单体服务文档
- * 创建时间：2023/4/27 10:24 上午
- * 创 建 人：z7
+ * Knife4j配置
+ *
+ * @author <font size = "20" color = "#3CAA3C"><a href="https://gitee.com/JustryDeng">JustryDeng</a></font> <img
+ * src="https://gitee.com/JustryDeng/shared-files/raw/master/JustryDeng/avatar.jpg" />
+ * @since 1.0.0
  */
-@Slf4j
 @Configuration
-@EnableSwagger2WebMvc
+@EnableSwagger2
 public class Knife4jConfig implements WebMvcConfigurer {
 
-    /*对于管控了权限的应用，应放行以下资源,需要放行的资源已经定义进上面编写的Knife4jConfig中*/
-    public static String[] RESOURCE_URLS = new String[]{"/webjars/**", "/swagger**", "/v2/api-docs", "/doc.html"};
+    /** 对于管控了权限的应用，应放行以下资源 */
+    public static String[] RESOURCE_URLS = new String[]{"/webjars/**", "/swagger**", "/v3/api-docs", "/doc.html"};
 
     @Value("${spring.application.name:default}")
     private String applicationName;
 
+    @Resource
+    private OpenApiExtensionResolver openApiExtensionResolver;
+
     @Bean
     public Docket docket() {
         // 指定使用Swagger2规范
-        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+        Docket docket = new Docket(DocumentationType.OAS_30)
                 .apiInfo(new ApiInfoBuilder()
                         // 简介(支持Markdown语法)
-                        .description("# API简介")
+                        .description("# 我是API简介")
                         // 服务地址
                         .termsOfServiceUrl("http://local.idea-aedi.com/")
                         // 作者及联系信息
-                        .contact(new Contact("z7", "https://github.com/z7-x/review-frame", "790534238@qq.com"))
+                        .contact(new Contact("JustryDeng", "https://gitee.com/JustryDeng", "13548417409@163.com"))
                         // api版本
                         .version("1.0.0")
                         .build())
@@ -78,6 +95,21 @@ public class Knife4jConfig implements WebMvcConfigurer {
                 .build();
 
         docket.securitySchemes(securitySchemes()).securityContexts(securityContexts());
+
+        // 自定义文档解析
+        try {
+            Field markdownPropertiesField = FieldUtils.getDeclaredField(OpenApiExtensionResolver.class,
+                    "markdownProperties", true);
+            List<MarkdownProperty> markdownProperties = (List<MarkdownProperty>)markdownPropertiesField.get(openApiExtensionResolver);
+            if (!CollectionUtils.isEmpty(markdownProperties)) {
+                for (MarkdownProperty markdownProperty : markdownProperties) {
+                    docket.extensions(openApiExtensionResolver.buildExtensions(markdownProperty.getGroup()));
+                }
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
         return docket;
     }
 
@@ -86,8 +118,7 @@ public class Knife4jConfig implements WebMvcConfigurer {
         List<SecurityScheme> result = new ArrayList<>();
         // 第一个参数name，自定义即可。 在配置securityContexts时，通过此name对应到apiKey即可
         // 第二个参数，header name自定义即可。 如：JWT_TOKEN_KEY=Auth-Token，然后在代码里request.getHeader(JWT_TOKEN_KEY)取值
-        String JWT_TOKEN_KEY="Auth-Token";
-        ApiKey apiKey = new ApiKey("ApiKey", JWT_TOKEN_KEY, "header");
+        ApiKey apiKey = new ApiKey("auth-info", "aaa", "header");
         result.add(apiKey);
         return result;
     }
@@ -115,8 +146,8 @@ public class Knife4jConfig implements WebMvcConfigurer {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
-        // 这里指定使用哪个apiKey进行认证鉴权. 这里指定使用上面名为ApiKey的apiKey
-        result.add(new SecurityReference("ApiKey", authorizationScopes));
+        // 这里指定使用哪个apiKey进行认证鉴权. 这里指定使用上面名为auth-info的apiKey
+        result.add(new SecurityReference("auth-info", authorizationScopes));
         return result;
     }
 
@@ -138,7 +169,6 @@ public class Knife4jConfig implements WebMvcConfigurer {
         } else {
             projectBasePackage = currPackageName;
         }
-        log.info("Base package to scan api is -> {}", projectBasePackage);
         return projectBasePackage;
     }
 
@@ -159,13 +189,11 @@ public class Knife4jConfig implements WebMvcConfigurer {
 
 
         static {
-            // swagger3用: parameterDescriptionField = ReflectionUtils.findField(RequestParameterBuilder.class, "description");
-            parameterDescriptionField = ReflectionUtils.findField(ParameterBuilder.class, "description");
+            parameterDescriptionField = ReflectionUtils.findField(RequestParameterBuilder.class, "description");
             Objects.requireNonNull(parameterDescriptionField, "parameterDescriptionField should noe be null.");
             ReflectionUtils.makeAccessible(parameterDescriptionField);
 
-            // swagger3用: modelPropertyBuilderDescriptionField = ReflectionUtils.findField(PropertySpecificationBuilder.class, "description");
-            modelPropertyBuilderDescriptionField = ReflectionUtils.findField(ModelPropertyBuilder.class, "description");
+            modelPropertyBuilderDescriptionField = ReflectionUtils.findField(PropertySpecificationBuilder.class, "description");
             Objects.requireNonNull(modelPropertyBuilderDescriptionField, "ModelPropertyBuilder_descriptionField should noe be null.");
             ReflectionUtils.makeAccessible(modelPropertyBuilderDescriptionField);
         }
@@ -197,19 +225,13 @@ public class Knife4jConfig implements WebMvcConfigurer {
             }
             Class<Enum<?>> enumType = (Class<Enum<?>>) fieldType;
             Enum<?>[] enumConstants = enumType.getEnumConstants();
-            // swagger3用: PropertySpecificationBuilder modelPropertyBuilder = context.getSpecificationBuilder();
-            ModelPropertyBuilder modelPropertyBuilder = context.getBuilder();
+            PropertySpecificationBuilder modelPropertyBuilder = context.getSpecificationBuilder();
             Object oldValue = ReflectionUtils.getField(modelPropertyBuilderDescriptionField, modelPropertyBuilder);
             // 解析枚举
             List<String> enumDescList =
                     Arrays.stream(enumConstants).map(this::obtainEnumDescription).collect(Collectors.toList());
-            /*
-             * swagger3用:
-             *   modelPropertyBuilder.description((oldValue == null ? BaseConstant.EMPTY : oldValue) + buildHtmlUnOrderList(enumDescList))
-             *                       .type(new ModelSpecificationBuilder().scalarModel(ScalarType.UUID).build());
-             */
             modelPropertyBuilder.description((oldValue == null ? "" : oldValue) + buildHtmlUnOrderList(enumDescList))
-                    .type(context.getResolver().resolve(Enum.class));
+                    .type(new ModelSpecificationBuilder().scalarModel(ScalarType.UUID).build());
         }
 
         /**
@@ -224,8 +246,7 @@ public class Knife4jConfig implements WebMvcConfigurer {
         @Override
         public void apply(ParameterContext context) {
             Class<?> type = context.resolvedMethodParameter().getParameterType().getErasedType();
-            // swagger3用: RequestParameterBuilder parameterBuilder = context.requestParameterBuilder();
-            ParameterBuilder parameterBuilder = context.parameterBuilder();
+            RequestParameterBuilder parameterBuilder = context.requestParameterBuilder();
             if (!Enum.class.isAssignableFrom(type)) {
                 return;
             }
@@ -241,7 +262,7 @@ public class Knife4jConfig implements WebMvcConfigurer {
          * 此插件是否支持处理该DocumentationType
          */
         @Override
-        public boolean supports(DocumentationType documentationType) {
+        public boolean supports(@NonNull DocumentationType documentationType) {
             return true;
         }
 
@@ -254,17 +275,7 @@ public class Knife4jConfig implements WebMvcConfigurer {
          */
         private String obtainEnumDescription(@NonNull Enum<?> enumObj) {
             String name = enumObj.name();
-            /*
-             * 枚举说明器示例:
-             *
-             * public interface EnumDescriptor {
-             *     // 获取枚举项说明
-             *     String obtainDescription();
-             * }
-             */
-            if (enumObj instanceof EnumDescriptor) {
-                return name + "：" + ((EnumDescriptor) enumObj).obtainDescription();
-            }
+
             return name;
         }
 

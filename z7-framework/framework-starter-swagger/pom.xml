@@ -17,42 +17,29 @@
     </properties>
 
     <dependencies>
-        <!--knife4j文档:start-->
-        <!--springboot低版本兼容问题：https://blog.csdn.net/weixin_39509262/article/details/129584913-->
+        <!--knife4j文档-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.springframework.plugin</groupId>-->
-<!--                    <artifactId>spring-plugin-core</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.springframework.plugin</groupId>-->
-<!--                    <artifactId>spring-plugin-metadata</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>3.0.3</version>
         </dependency>
-        <!--集成knife4j版本过低，引入高版本spring-plugin-core-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.plugin</groupId>-->
-<!--            <artifactId>spring-plugin-core</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.plugin</groupId>-->
-<!--            <artifactId>spring-plugin-metadata</artifactId>-->
-<!--        </dependency>-->
-        <!--knife4j文档:end-->
-
         <!--web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--验证-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
+
+        <!--springboot低版本兼容问题：https://blog.csdn.net/weixin_39509262/article/details/129584913-->
+        <!--集成knife4j版本过低，引入高版本spring-plugin-core-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.plugin</groupId>-->
+        <!--            <artifactId>spring-plugin-core</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.plugin</groupId>-->
+        <!--            <artifactId>spring-plugin-metadata</artifactId>-->
+        <!--        </dependency>-->
+        <!--knife4j文档:end-->
     </dependencies>
+
 </project>

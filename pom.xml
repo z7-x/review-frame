@@ -119,13 +119,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--knife4j文档：start-->
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
-                <version>${knife4j.version}</version>
-            </dependency>
-            <!--集成knife4j版本过低，引入高版本spring-plugin-core-->
+            <!--引入高版本spring-plugin-core-->
             <dependency>
                 <groupId>org.springframework.plugin</groupId>
                 <artifactId>spring-plugin-core</artifactId>
@@ -136,8 +130,12 @@
                 <artifactId>spring-plugin-metadata</artifactId>
                 <version>${knife4j.clash.version}</version>
             </dependency>
-            <!--knife4j文档:end-->
-
+            <!-- dependencyManagement 如果这里置顶了版本号， 以这里为准  那你是咋知道autoconfigure2.1.4是正确的版本那  我去knife里面看的-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>2.1.4.RELEASE</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

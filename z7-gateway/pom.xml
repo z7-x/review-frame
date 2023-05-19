@@ -121,6 +121,18 @@
         <!--            </exclusions>-->
         <!--        </dependency>-->
         <!--集成knife4j-->
+        <!--集成knife4j:start-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <!--集成knife4j:end-->
 
     </dependencies>
 </project>
