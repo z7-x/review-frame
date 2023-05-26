@@ -25,11 +25,13 @@ import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 /**
- * 网关knife4j配置
- *
- * @author <font size = "20" color = "#3CAA3C"><a href="https://gitee.com/JustryDeng">JustryDeng</a></font> <img src="https://gitee.com/JustryDeng/shared-files/raw/master/JustryDeng/avatar.jpg" />
- * @since 2021.0.1.D
+ * 项目名称：review-frame
+ * 类 名 称：Knife4jGatewayConfig
+ * 类 描 述：TODO  网关knife4j配置
+ * 创建时间：2023/5/26 17:12 下午
+ * 创 建 人：z7
  */
 @RestController
 public class Knife4jGatewayConfig {
