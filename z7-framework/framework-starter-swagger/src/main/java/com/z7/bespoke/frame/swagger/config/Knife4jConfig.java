@@ -48,11 +48,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Knife4j配置
- *
- * @author <font size = "20" color = "#3CAA3C"><a href="https://gitee.com/JustryDeng">JustryDeng</a></font> <img
- * src="https://gitee.com/JustryDeng/shared-files/raw/master/JustryDeng/avatar.jpg" />
- * @since 1.0.0
+ * 项目名称：review-frame
+ * 类 名 称：Knife4jConfig
+ * 类 描 述：TODO Knife4j配置
+ * 创建时间：2023/5/17 10:23 上午
+ * 创 建 人：z7
  */
 @Configuration
 @EnableSwagger2
@@ -77,7 +77,7 @@ public class Knife4jConfig implements WebMvcConfigurer {
                         // 服务地址
                         .termsOfServiceUrl("http://local.idea-aedi.com/")
                         // 作者及联系信息
-                        .contact(new Contact("JustryDeng", "https://gitee.com/JustryDeng", "13548417409@163.com"))
+                        .contact(new Contact("Z-SEVEN", "https://github.com/z7-x/review-frame", "790534238@qq.com"))
                         // api版本
                         .version("1.0.0")
                         .build())
@@ -118,7 +118,8 @@ public class Knife4jConfig implements WebMvcConfigurer {
         List<SecurityScheme> result = new ArrayList<>();
         // 第一个参数name，自定义即可。 在配置securityContexts时，通过此name对应到apiKey即可
         // 第二个参数，header name自定义即可。 如：JWT_TOKEN_KEY=Auth-Token，然后在代码里request.getHeader(JWT_TOKEN_KEY)取值
-        ApiKey apiKey = new ApiKey("auth-info", "aaa", "header");
+        String JWT_TOKEN_KEY="Auth-Token";
+        ApiKey apiKey = new ApiKey("ApiKey", JWT_TOKEN_KEY, "header");
         result.add(apiKey);
         return result;
     }
