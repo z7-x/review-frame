@@ -28,6 +28,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
         <!--springboot低版本兼容问题：https://blog.csdn.net/weixin_39509262/article/details/129584913-->
         <!--集成knife4j版本过低，引入高版本spring-plugin-core-->

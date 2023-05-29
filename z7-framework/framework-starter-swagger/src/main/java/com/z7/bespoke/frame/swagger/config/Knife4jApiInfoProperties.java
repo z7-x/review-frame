@@ -1,5 +1,6 @@
 package com.z7.bespoke.frame.swagger.config;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
  * 创建时间：2023/5/17 10:23 上午
  * 创 建 人：z7
  */
+@Data
 @Component
 public class Knife4jApiInfoProperties {
 
