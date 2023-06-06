@@ -18,6 +18,7 @@
         <module>framework-starter-poi</module>
         <module>framework-starter-swagger</module>
         <module>framework-starter-sftp</module>
+        <module>framework-starter-rabbitmq</module>
     </modules>
 
 </project>

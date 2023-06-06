@@ -203,7 +203,7 @@ public class Knife4jConfig implements WebMvcConfigurer {
         /**
          * {@link ApiModelProperty}相关
          * <p>
-         * 主要处理枚举对象直接作为方法参数的内部字段的情况. 如：
+         * 主要处理枚举对象直接作为方法参数的内部字段的情况. 如
          * <pre>
          *  &nbsp;  @Data
          *  &nbsp;  public class LoginTokenRespVO {
