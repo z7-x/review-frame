@@ -19,6 +19,7 @@
         <module>framework-starter-swagger</module>
         <module>framework-starter-sftp</module>
         <module>framework-starter-rabbitmq</module>
+        <module>framework-starter-third-party</module>
     </modules>
 
 </project>
